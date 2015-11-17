@@ -1,5 +1,2 @@
-.old
-lib/.old
-
 *.pyc
 __pycache__
