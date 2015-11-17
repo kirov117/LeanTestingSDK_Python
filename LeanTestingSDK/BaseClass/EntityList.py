@@ -9,7 +9,7 @@ class EntityList:
 
 	_origin     = None # Reference to originating Client instance
 
-	_identifier = None # Class name identifier for the collection Entities
+	_identifier = None # Class definition identifier for the collection Entities
 	_collection = None # Internal collection corresponding to current page
 
 	_request    = None # APIRequest definition to use for collection generation
@@ -48,9 +48,9 @@ class EntityList:
 			raise SDKUnexpectedResponseException('`meta` missing `pagination` field')
 
 		if 'links' in raw['meta']['pagination']:
-			raw['meta']['pagination'].pop('links')    # Remove not needed links sub-data
+			raw['meta']['pagination'].pop('links')		# Remove not needed links sub-data
 
-		self._pagination = raw['meta']['pagination'] # Pass pagination data as per response meta key
+		self._pagination = raw['meta']['pagination']	# Pass pagination data as per response meta key
 		raw.pop('meta')
 
 		if not len(raw):
@@ -59,9 +59,9 @@ class EntityList:
 			cols = ', '.join(raw.keys())
 			raise SDKUnexpectedResponseException('expected one collection object, multiple received: ' + cols)
 
-		classIdent = self._identifier # Identifier to be used for dynamic Entity instancing
+		classDef = self._identifier # Definition to be used for dynamic Entity instancing
 		for entity in next(iter(raw.values())):
-			self._collection.append(entity) #TODO <- ?????
+			self._collection.append(classDef(self._origin, entity))
 
 	def __init__(self, origin, request, identifier, filters = None):
 		"""
@@ -73,7 +73,7 @@ class EntityList:
 		origin     PyClient   -- Original client instance reference
 		request    APIRequest -- An API Request definition given by the entity collection handler. This is used for any
 							subsequent collection regeneration, as any data updates are dependant on external requests.
-		identifier str        -- class name identifier to use for dynamic class instancing within list collection
+		identifier class      -- class definition to use for dynamic class instancing within list collection
 		filters    dict       -- original filters passed over from originating all() call
 
 		"""
@@ -83,7 +83,7 @@ class EntityList:
 
 		self._origin     = origin
 		self._request    = request
-		self._identifier = identifier #TODO <-???????
+		self._identifier = identifier
 		self._filters    = filters
 
 		if 'page' in filters.keys():

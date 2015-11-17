@@ -2,6 +2,8 @@ from BaseClass.EntityList       import EntityList
 from BaseClass.EntityHandler    import EntityHandler
 from BaseClass.APIRequest       import APIRequest
 
+from Entity.Platform.PlatformBrowserVersion import PlatformBrowserVersion
+
 class PlatformBrowserVersionsHandler(EntityHandler):
 
 	_browserID = None
@@ -18,4 +20,4 @@ class PlatformBrowserVersionsHandler(EntityHandler):
 		super().all(filters)
 
 		request = APIRequest(self._origin, '/v1/platform/browsers/' + self._browserID + '/versions', 'GET')
-		return EntityList(self._origin, request, 'PlatformBrowserVersion', filters)
+		return EntityList(self._origin, request, PlatformBrowserVersion, filters)

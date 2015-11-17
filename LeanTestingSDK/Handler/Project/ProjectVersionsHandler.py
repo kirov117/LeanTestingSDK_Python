@@ -37,4 +37,4 @@ class ProjectVersionsHandler(EntityHandler):
         super().all(filters)
 
         request = APIRequest(self._origin, '/v1/projects/' + self._projectID + '/versions', 'GET')
-        return EntityList(self._origin, request, 'ProjectVersion', filters)
+        return EntityList(self._origin, request, ProjectVersion, filters)

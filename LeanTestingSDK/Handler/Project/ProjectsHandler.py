@@ -25,7 +25,7 @@ class ProjectsHandler(EntityHandler):
         super().all(filters)
 
         request = APIRequest(self._origin, '/v1/projects', 'GET')
-        return EntityList(self._origin, request, 'Project', filters)
+        return EntityList(self._origin, request, Project, filters)
 
     def allArchived(self, filters = None):
         if filters is None:
@@ -34,7 +34,7 @@ class ProjectsHandler(EntityHandler):
         super().all(filters)
 
         request = APIRequest(self._origin, '/v1/projects/archived', 'GET')
-        return EntityList(self._origin, request, 'Project', filters)
+        return EntityList(self._origin, request, Project, filters)
 
     def find(self, id_):
         super().find(id_)

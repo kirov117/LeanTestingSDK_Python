@@ -37,4 +37,4 @@ class ProjectSectionsHandler(EntityHandler):
         super().all(filters)
 
         request = APIRequest(self._origin, '/v1/projects/' + self._projectID + '/sections', 'GET')
-        return EntityList(self._origin, request, 'ProjectSection', filters)
+        return EntityList(self._origin, request, ProjectSection, filters)

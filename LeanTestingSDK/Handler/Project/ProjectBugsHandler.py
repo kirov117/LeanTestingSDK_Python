@@ -55,4 +55,4 @@ class ProjectBugsHandler(EntityHandler):
         super().all(filters)
 
         request = APIRequest(self._origin, '/v1/projects/' + self._projectID + '/bugs', 'GET')
-        return EntityList(self._origin, request, 'Bug', filters)
+        return EntityList(self._origin, request, Bug, filters)

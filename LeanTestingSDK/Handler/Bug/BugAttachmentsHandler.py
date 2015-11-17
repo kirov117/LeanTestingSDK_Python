@@ -2,6 +2,8 @@ from BaseClass.EntityList       import EntityList
 from BaseClass.EntityHandler    import EntityHandler
 from BaseClass.APIRequest       import APIRequest
 
+from Entity.Bug.BugAttachment import BugAttachment
+
 class BugAttachmentsHandler(EntityHandler):
 
     _bugID = None
@@ -20,4 +22,4 @@ class BugAttachmentsHandler(EntityHandler):
             filters = {}
 
         request = APIRequest(self._origin, '/v1/bugs/' + self._bugID + '/attachments', 'GET')
-        return EntityList(self._origin, request, 'BugAttachment', filters)
+        return EntityList(self._origin, request, BugAttachment, filters)

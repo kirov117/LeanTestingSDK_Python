@@ -2,6 +2,8 @@ from BaseClass.EntityList       import EntityList
 from BaseClass.EntityHandler    import EntityHandler
 from BaseClass.APIRequest       import APIRequest
 
+from Entity.Platform.PlatformDevice import PlatformDevice
+
 class PlatformTypeDevicesHandler(EntityHandler):
 
 	_typeID = None
@@ -18,4 +20,4 @@ class PlatformTypeDevicesHandler(EntityHandler):
 		super().all(filters)
 
 		request = APIRequest(self._origin, '/v1/platform/types/' + self._typeID + '/devices', 'GET')
-		return EntityList(self._origin, request, 'PlatformDevice', filters)
+		return EntityList(self._origin, request, PlatformDevice, filters)

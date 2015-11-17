@@ -13,7 +13,7 @@ class PlatformTypesHandler(EntityHandler):
         super().all(filters)
 
         request = APIRequest(self._origin, '/v1/platform/types', 'GET')
-        return EntityList(self._origin, request, 'PlatformType', filters)
+        return EntityList(self._origin, request, PlatformType, filters)
 
     def find(self, id_):
         super().find(id_)

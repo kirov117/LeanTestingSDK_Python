@@ -2,6 +2,8 @@ from BaseClass.EntityList       import EntityList
 from BaseClass.EntityHandler    import EntityHandler
 from BaseClass.APIRequest       import APIRequest
 
+from Entity.Project.ProjectBugScheme import ProjectBugScheme
+
 class ProjectBugStatusSchemeHandler(EntityHandler):
 
     _projectID = None
@@ -18,4 +20,4 @@ class ProjectBugStatusSchemeHandler(EntityHandler):
         super().all(filters)
 
         request = APIRequest(self._origin, '/v1/projects/' + self._projectID + '/bug-status-scheme', 'GET')
-        return EntityList(self._origin, request, 'ProjectBugScheme', filters)
+        return EntityList(self._origin, request, ProjectBugScheme, filters)

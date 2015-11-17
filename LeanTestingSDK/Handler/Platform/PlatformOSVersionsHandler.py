@@ -2,6 +2,8 @@ from BaseClass.EntityList       import EntityList
 from BaseClass.EntityHandler    import EntityHandler
 from BaseClass.APIRequest       import APIRequest
 
+from Entity.Platform.PlatformOSVersion import PlatformOSVersion
+
 class PlatformOSVersionsHandler(EntityHandler):
 
 	_osID = None
@@ -18,4 +20,4 @@ class PlatformOSVersionsHandler(EntityHandler):
 		super().all(filters)
 
 		request = APIRequest(self._origin, '/v1/platform/os/' + self._osID + '/versions', 'GET')
-		return EntityList(self._origin, request, 'PlatformOSVersion', filters)
+		return EntityList(self._origin, request, PlatformOSVersion, filters)
