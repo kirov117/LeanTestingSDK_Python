@@ -17,13 +17,13 @@ class ProjectVersionsHandler(EntityHandler):
         super().create(fields)
 
         supports = {
-            'number': REQUIRED
+            'number': True
         }
 
         if self.enforce(fields, supports):
             req = APIRequest(
                 self._origin,
-                '/v1/projects/' + self._projectID + '/versions',
+                '/v1/projects/' + str(self._projectID) + '/versions',
                 'POST',
                 {'params': fields}
             )
@@ -36,5 +36,5 @@ class ProjectVersionsHandler(EntityHandler):
 
         super().all(filters)
 
-        request = APIRequest(self._origin, '/v1/projects/' + self._projectID + '/versions', 'GET')
+        request = APIRequest(self._origin, '/v1/projects/' + str(self._projectID) + '/versions', 'GET')
         return EntityList(self._origin, request, ProjectVersion, filters)

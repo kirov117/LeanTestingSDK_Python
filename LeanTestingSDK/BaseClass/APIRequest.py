@@ -122,7 +122,7 @@ class APIRequest:
 
 		callUrl = self._opts['base_uri'] + self._endpoint
 
-		ch.setopt(pycurl.CUSTOMREQUEST, self._method)
+		ch.setopt(ch.CUSTOMREQUEST, self._method)
 
 		if self._method == 'GET':
 			expectedHTTPStatus = 200
@@ -132,16 +132,17 @@ class APIRequest:
 		elif self._method == 'POST' or self._method == 'PUT':
 			expectedHTTPStatus = 200
 
-			if self._opts['form_data'] == True:
-				ch.setopt(pycurl.POSTFIELDS, self._opts['params'])
+			if self._opts['form_data'] == True and 'file_path' in _opts.keys():
+				# ch.setopt(ch.POSTFIELDS, self._opts['params'])
+				ch.setopt(ch.POSTFIELDS, [('file', (c.FORM_FILE, self._opts['file_path'],)),])
 
 				curlHeaders.append('Content-Type: multipart/form-data')
 			else:
 				jsonData = json.dumps(self._opts['params'])
-				ch.setopt(pycurl.POSTFIELDS, jsonData)
+				ch.setopt(ch.POSTFIELDS, jsonData)
 
 				curlHeaders.append('Content-Type: application/json')
-				curlHeaders.append('Content-Length: ' + len(jsonData))
+				curlHeaders.append('Content-Length: ' + str(len(jsonData)))
 
 		elif self._method == 'DELETE':
 			expectedHTTPStatus = 204
@@ -149,20 +150,20 @@ class APIRequest:
 		if isinstance(self._origin.getCurrentToken(), str):
 			curlHeaders.append('Authorization: Bearer ' + self._origin.getCurrentToken())
 
-		ch.setopt(pycurl.HTTPHEADER, curlHeaders)
-		ch.setopt(pycurl.URL, callUrl)
+		ch.setopt(ch.HTTPHEADER, curlHeaders)
+		ch.setopt(ch.URL, callUrl)
 
-		ch.setopt(pycurl.HEADER, False)
-		ch.setopt(pycurl.RETURNTRANSFER, True)
+		ch.setopt(ch.HEADER, False)
+		# ch.setopt(ch.RETURNTRANSFER, True)
 
 		curlBuffer = BytesIO()
-		ch.setopt(pycurl.WRITEFUNCTION, curlBuffer.write)
+		ch.setopt(ch.WRITEFUNCTION, curlBuffer.write)
 		ch.perform()
 
 		curlData = curlBuffer.getvalue()
 		curlData = curlData.decode()
 
-		curlStatus = ch.getinfo(pycurl.HTTP_CODE)
+		curlStatus = ch.getinfo(ch.HTTP_CODE)
 
 		if curlStatus != expectedHTTPStatus:
 			raise SDKErrorResponseException(curlData)

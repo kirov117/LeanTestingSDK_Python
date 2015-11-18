@@ -10,8 +10,8 @@ class ProjectsHandler(EntityHandler):
         super().create(fields)
 
         supports = {
-            'name'            : REQUIRED,
-            'organization_id' : OPTIONAL
+            'name'            : True,
+            'organization_id' : False
         }
 
         if self.enforce(fields, supports):
@@ -39,5 +39,5 @@ class ProjectsHandler(EntityHandler):
     def find(self, id_):
         super().find(id_)
 
-        req = APIRequest(self._origin, '/v1/projects/' + id_, 'GET')
+        req = APIRequest(self._origin, '/v1/projects/' + str(id_), 'GET')
         return Project(self._origin, req.exec_())

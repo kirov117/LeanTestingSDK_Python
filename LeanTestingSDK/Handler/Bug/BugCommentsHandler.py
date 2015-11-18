@@ -19,5 +19,5 @@ class BugCommentsHandler(EntityHandler):
 
 		super().all(filters)
 
-		request = APIRequest(self._origin, '/v1/bugs/' + self._bugID + '/comments', 'GET')
+		request = APIRequest(self._origin, '/v1/bugs/' + str(self._bugID) + '/comments', 'GET')
 		return EntityList(self._origin, request, BugComment, filters)

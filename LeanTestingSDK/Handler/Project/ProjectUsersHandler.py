@@ -19,5 +19,5 @@ class ProjectUsersHandler(EntityHandler):
 
         super().all(filters)
 
-        request = APIRequest(self._origin, '/v1/projects/' + self._projectID + '/users', 'GET')
+        request = APIRequest(self._origin, '/v1/projects/' + str(self._projectID) + '/users', 'GET')
         return EntityList(self._origin, request, ProjectUser, filters)

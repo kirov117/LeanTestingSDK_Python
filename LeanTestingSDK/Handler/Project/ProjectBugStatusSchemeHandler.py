@@ -19,5 +19,5 @@ class ProjectBugStatusSchemeHandler(EntityHandler):
 
         super().all(filters)
 
-        request = APIRequest(self._origin, '/v1/projects/' + self._projectID + '/bug-status-scheme', 'GET')
+        request = APIRequest(self._origin, '/v1/projects/' + str(self._projectID) + '/bug-status-scheme', 'GET')
         return EntityList(self._origin, request, ProjectBugScheme, filters)

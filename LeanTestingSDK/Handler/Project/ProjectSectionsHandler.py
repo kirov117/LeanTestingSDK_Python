@@ -17,13 +17,13 @@ class ProjectSectionsHandler(EntityHandler):
         super().create(fields)
 
         supports = {
-            'name': REQUIRED
+            'name': True
         }
 
         if self.enforce(fields, supports):
             req = APIRequest(
                 self._origin,
-                '/v1/projects/' + self._projectID + '/sections',
+                '/v1/projects/' + str(self._projectID) + '/sections',
                 'POST',
                 {'params': fields}
             )
@@ -36,5 +36,5 @@ class ProjectSectionsHandler(EntityHandler):
 
         super().all(filters)
 
-        request = APIRequest(self._origin, '/v1/projects/' + self._projectID + '/sections', 'GET')
+        request = APIRequest(self._origin, '/v1/projects/' + str(self._projectID) + '/sections', 'GET')
         return EntityList(self._origin, request, ProjectSection, filters)

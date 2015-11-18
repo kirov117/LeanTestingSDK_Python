@@ -36,7 +36,7 @@ class EntityList:
 
 		"""
 
-		self._collection = {} # Clear previous collection data on fresh regeneration
+		self._collection = [] # Clear previous collection data on fresh regeneration
 		self._pagination = {} # Clear previous pagination data on fresh regeneration
 
 		self._request.updateOpts({'params': self._filters})

@@ -17,31 +17,36 @@ class ProjectBugsHandler(EntityHandler):
         super().create(fields)
 
         supports = {
-            'title'              : REQUIRED,
-            'status_id'          : REQUIRED,
-            'severity_id'        : REQUIRED,
-            'project_version'    : REQUIRED,
-            'project_version_id' : REQUIRED,
-            'project_section_id' : OPTIONAL,
-            'type_id'            : OPTIONAL,
-            'reproducibility_id' : OPTIONAL,
-            'assigned_user_id'   : OPTIONAL,
-            'description'        : OPTIONAL,
-            'expected_results'   : OPTIONAL,
-            'steps'              : OPTIONAL,
-            'platform'           : OPTIONAL,
-            'device_model'       : OPTIONAL,
-            'device_model_id'    : OPTIONAL,
-            'os'                 : OPTIONAL,
-            'os_version'         : OPTIONAL,
-            'os_version_id'      : OPTIONAL,
-            'browser_version_id' : OPTIONAL
+            'title'              : True,
+            'status_id'          : True,
+            'severity_id'        : True,
+            'project_version'    : True,
+            'project_version_id' : True,
+            'project_section_id' : False,
+            'type_id'            : False,
+            'reproducibility_id' : False,
+            'assigned_user_id'   : False,
+            'description'        : False,
+            'expected_results'   : False,
+            'steps'              : False,
+            'platform'           : False
+            # 'device_model'       : OPTIONAL,
+            # 'device_model_id'    : OPTIONAL,
+            # 'os'                 : OPTIONAL,
+            # 'os_version'         : OPTIONAL,
+            # 'os_version_id'      : OPTIONAL,
+            # 'browser_version_id' : OPTIONAL
         }
+
+        if 'project_version_id' in fields.keys():
+            supports['project_version'] = OPTIONAL
+        elif 'project_version' in fields.keys():
+            supports['project_version_id'] = OPTIONAL
 
         if self.enforce(fields, supports):
             req = APIRequest(
                 self._origin,
-                '/v1/projects/' + self._projectID + '/bugs',
+                '/v1/projects/' + str(self._projectID) + '/bugs',
                 'POST',
                 {'params': fields}
             )
@@ -54,5 +59,5 @@ class ProjectBugsHandler(EntityHandler):
 
         super().all(filters)
 
-        request = APIRequest(self._origin, '/v1/projects/' + self._projectID + '/bugs', 'GET')
+        request = APIRequest(self._origin, '/v1/projects/' + str(self._projectID) + '/bugs', 'GET')
         return EntityList(self._origin, request, Bug, filters)

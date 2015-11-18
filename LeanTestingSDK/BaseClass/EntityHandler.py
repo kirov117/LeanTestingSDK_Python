@@ -30,7 +30,7 @@ class EntityHandler:
 
 		"""
 
-		self.origin = origin
+		self._origin = origin
 
 	def create(self, fields):
 		"""
@@ -165,7 +165,7 @@ class EntityHandler:
 		mreq  = []				# Missing required keys
 
 		for sk, sv in supports.items():
-			if sv == 1:
+			if sv == True:
 				sreq.append(sk)
 			sall.append(sk)
 			socc[sk] = 0
@@ -176,7 +176,7 @@ class EntityHandler:
 			else:
 				unsup.append(k)
 
-		for ok, ov in socc:
+		for ok, ov in socc.items():
 			if ov > 1:
 				dupl.append(ok)
 			elif ov == 0 and ok in sreq:
