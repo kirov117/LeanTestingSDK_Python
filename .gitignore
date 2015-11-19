@@ -3,3 +3,7 @@ runtime.py
 
 *.pyc
 __pycache__
+
+LeanTestingSDK/.old
+LeanTestingSDK/*.pyc
+LeanTestingSDK/__pycache__

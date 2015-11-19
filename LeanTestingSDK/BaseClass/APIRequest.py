@@ -23,7 +23,7 @@ class APIRequest:
 	_default_opts = {								# Basic support for extended opts
 		'base_uri'	:'https://api.leantesting.com',	# assumed default for API base
 		'form_data'	: False,						# sets content type to multipart/form-data if true
-		'params'	: []							# params to be pased in request
+		'params'	: {}							# params to be pased in request
 	}
 
 	_origin   = None

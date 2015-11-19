@@ -152,8 +152,6 @@ class EntityList:
 		self._generateCollectionData()
 		self._realPage += 1
 
-
-
 	def __next__(self):
 		"""
 

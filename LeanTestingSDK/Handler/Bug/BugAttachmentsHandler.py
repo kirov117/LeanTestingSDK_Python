@@ -26,7 +26,7 @@ class BugAttachmentsHandler(EntityHandler):
 										example: /home/path/to/file.txt (Linux), C:\\Users\\Documents\\file.txt (Windows)
 
 		Exceptions:
-		SDKInvalidArgException if $filepath is not a string
+		SDKInvalidArgException if filepath is not a string
 
 		Returns:
 		BugAttachment -- the newly uploaded attachment
