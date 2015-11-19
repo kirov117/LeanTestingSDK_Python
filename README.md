@@ -35,7 +35,7 @@ generatedURL = LT.auth.generateAuthLink(
 	'admin',
 	'a3ahdh2iqhdasdasfdjahf26'
 )
-# print(generatedURL)
+print( generatedURL )
 ```
 
 - Exchange Authorization Code For **Access TOKEN**
@@ -47,7 +47,7 @@ token = LT.auth.exchangeAuthCode(
 	'sOgY2DT47B2K0bqashnk0E6wUaYgbbspwdy9kGrk',
 	'https://www.example.com/appurl/'
 )
-print(token)
+print( token )
 ```
 
 ######~~/////////////////////////////////////////////////////////////////////////////////////~~
