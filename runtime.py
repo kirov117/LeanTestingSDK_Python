@@ -13,6 +13,41 @@ LT.attachToken('3UsdKZXpGPnvHuJ9di1SeAFqrp14GKvQQMyclGRk')
 
 #####################################################################################
 
+# Including Lean Testing Python SDK
+# from LeanTestingSDK.PyClient import PyClient as LeanTestingClient
+
+# Creating A New INSTANCE
+# LT = LeanTestingClient()
+
+#####################################################################################
+
+# Get Current TOKEN
+# LT.getCurrentToken()
+
+# Attach New TOKEN
+# LT.attachToken('9ErdKZXpGPnvHuJ9di92eAFqrp14GKvfHMyclGGh')
+
+# Generate Authorization URL
+# generatedURL = LT.auth.generateAuthLink(
+#   'RBxaSvtplj1Xos4vbEbwGKkXRu0GJmd5Rdha2HHa',
+#   'http://lev.it.cx:17600/lean/',
+#   'admin',
+#   'a3ahdh2iqhdasdasfdjahf26'
+# )
+# p.pprint(generatedURL)
+
+# Exchange Authorization Code For Access TOKEN
+# token = LT.auth.exchangeAuthCode(
+#   'RBxaSvtplj1Xos4vbEbwGKkXRu0GJmd5Rdha2HHa',
+#   'FpOZxNbe9VEwVbjUINoAepOhgS8FNQsOkpE4CtPO',
+#   'authorization_code',
+#   '3UwWk6uGccGTnV1wG1kA1WSeTM278zFmPwjAzThS',
+#   'http://lev.it.cx:17600/lean/'
+# )
+# p.pprint( token )
+
+#####################################################################################
+
 # Get USER Information
 # p.pprint( LT.user.getInformation() )
 
@@ -26,8 +61,8 @@ LT.attachToken('3UsdKZXpGPnvHuJ9di1SeAFqrp14GKvQQMyclGRk')
 
 # Create A New PROJECT
 # newProject = LT.projects.create({
-# 	'name': 'Project0253',
-# 	'organization_id': 5779
+#   'name': 'Project0253',
+#   'organization_id': 5779
 # })
 # p.pprint( newProject.data )
 
@@ -40,7 +75,7 @@ LT.attachToken('3UsdKZXpGPnvHuJ9di1SeAFqrp14GKvQQMyclGRk')
 
 # Adding A PROJECT Section
 # newSection = LT.projects.find(3515).sections.create({
-# 	'name': 'AnotherSctNm1'
+#   'name': 'AnotherSctNm1'
 # })
 # p.pprint( newSection.data )
 
@@ -50,7 +85,7 @@ LT.attachToken('3UsdKZXpGPnvHuJ9di1SeAFqrp14GKvQQMyclGRk')
 
 # Adding A PROJECT Version
 # newVersion = LT.projects.find(3515).versions.create({
-# 	'number': 'v0.2.7889'
+#   'number': 'v0.2.7889'
 # })
 # p.pprint( newVersion.data )
 
@@ -76,16 +111,28 @@ LT.attachToken('3UsdKZXpGPnvHuJ9di1SeAFqrp14GKvQQMyclGRk')
 # p.pprint( LT.projects.find(3515).bugs.all().toArray() )
 
 # Create A New BUG
-#TODO this
+# newBug = LT.projects.find(3515).bugs.create({
+#   'title': 'Something bad happened...',
+#   'status_id': 1,
+#   'severity_id': 2,
+#   'project_version_id': 10242
+# })
+# p.pprint( newBug.data )
 
 # Retrieve Existing BUG
 # p.pprint( LT.bugs.find(38483).data )
 
 # Update A BUG
-#TODO this
+# updatedBug = LT.bugs.update(118622, {
+#   'title': 'Updated title happened...',
+#   'status_id': 1,
+#   'severity_id': 2,
+#   'project_version_id': 10242
+# })
+# p.pprint( updatedBug.data )
 
 # Delete A BUG
-#TODO this
+# p.pprint( LT.bugs.delete(118622) )
 
 #####################################################################################
 
@@ -98,13 +145,15 @@ LT.attachToken('3UsdKZXpGPnvHuJ9di1SeAFqrp14GKvQQMyclGRk')
 # p.pprint( LT.bugs.find(38483).attachments.all().toArray() )
 
 # Upload An ATTACHMENT
-#TODO this
+# filePath = '/store1/Downloads/Faine/1370240743_2294218.jpg'
+# newAttachment = LT.bugs.find(38483).attachments.upload(filePath)
+# p.pprint( newAttachment.data )
 
 # Retrieve An Existing ATTACHMENT
 # p.pprint( LT.attachments.find(21515).data )
 
 # Delete An ATTACHMENT
-#TODO this
+# p.pprint( LT.attachments.delete(75258) )
 
 #####################################################################################
 
@@ -112,30 +161,31 @@ LT.attachToken('3UsdKZXpGPnvHuJ9di1SeAFqrp14GKvQQMyclGRk')
 # p.pprint( LT.platform.types.all().toArray() )
 
 # Retrieve PLATFORM Type
-#TODO wait for fix
+# p.pprint( LT.platform.types.find(1).data )
 
 
 # List PLATFORM Devices
-#TODO wait for fix
+# p.pprint( LT.platform.types.find(1).devices.all().toArray() )
 
-# Retrieve Existing  Device
-#TODO wait for fix
+# Retrieve Existing Device
+# p.pprint( LT.platform.devices.find(11).data )
 
 
 # List OS
 # p.pprint( LT.platform.os.all().toArray() )
 
 # Retrieve Existing OS
-#TODO wait for fix
+# p.pprint( LT.platform.os.find(1).data )
 
 # List OS Versions
-#TODO wait for fix
+# p.pprint( LT.platform.os.find(1).versions.all().toArray() )
 
 
 # List Browsers
-#TODO wait for fix
+# p.pprint( LT.platform.browsers.all().toArray() )
+
+# Retrieve Existing Browser
+# p.pprint( LT.platform.browsers.find(1).data )
 
 # List Browser Versions
-#TODO wait for fix
-
-
+# p.pprint( LT.platform.browsers.find(1).versions.all().toArray() )
