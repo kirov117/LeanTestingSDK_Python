@@ -195,7 +195,7 @@ LT.bugs.find(38483).attachments.all().toArray()
 ```python
 filePath = '/place/Downloads/Images/1370240743_2294218.jpg'
 newAttachment = LT.bugs.find(38483).attachments.upload(filePath)
-p.pprint( newAttachment.data )
+print( newAttachment.data )
 ```
 
 - Retrieve An Existing **Attachment**
@@ -261,6 +261,49 @@ LT.platform.browsers.find(1).data
 - List **Browser Versions**
 ```python
 LT.platform.browsers.find(1).versions.all().toArray()
+```
+
+######~~/////////////////////////////////////////////////////////////////////////////////////~~
+
+- Using **Filters**
+```python
+LT.projects.find(3515).bugs.all({'limit': 2, 'page': 5}).toArray()
+```
+
+- **Entity List** Functions
+```python
+browsers = LT.platform.browsers.all()
+print( browsers.total() )
+print( browsers.totalPages() )
+print( browsers.count() )
+print( browsers.toArray() )
+```
+
+- **Entity List** Iterator
+When used in for loops, entity lists will automatically cycle to first page, regardless of `page` filter.
+After ending the loop, the entity list will **NOT** revert to first page or the initial instancing `page` filter setting in order not to cause useless API request calls.
+```python
+comments = LT.bugs.find(38483).comments.all({'limit': 1})
+for page in comments:
+	print( page )
+```
+
+- **Entity List** Manual Iteration
+```python
+comments = LT.bugs.find(38483).comments.all({'limit': 1})
+print( comments.toArray() )
+
+# Will return false if unable to move forwards
+comments.next();      print( comments.toArray() )
+
+# Will return false if already on last page
+comments.last();      print( comments.toArray() )
+
+# Will return false if unable to move backwards
+comments.previous();  print( comments.toArray() )
+
+# Will return false if already on first page
+comments.first();     print( comments.toArray() )
 ```
 
 ######~~/////////////////////////////////////////////////////////////////////////////////////~~

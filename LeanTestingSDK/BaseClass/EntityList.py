@@ -104,7 +104,7 @@ class EntityList:
 		"""
 
 		if self._pagination['current_page'] == 1:
-			return
+			return False
 
 		self._filters['page'] = 1
 		self._generateCollectionData()
@@ -121,7 +121,7 @@ class EntityList:
 		"""
 
 		if self._pagination['current_page'] == 1:
-			return
+			return False
 
 		self._filters['page'] -= 1
 		self._generateCollectionData()
@@ -141,8 +141,8 @@ class EntityList:
 
 		"""
 
-		if not (self._realPage == self._pagination['current_page'] and self._realPage <= self._pagination['total_pages']):
-			raise StopIteration()
+		if self._pagination['current_page'] == self._pagination['total_pages']:
+			return False
 
 		if 'page' in self._filters.keys():
 			self._filters['page'] += 1
@@ -155,7 +155,7 @@ class EntityList:
 	def __next__(self):
 		"""
 
-		Alias of next()
+		Internal equivalent of next(), to be used in iteration loops
 		(required for iterator implementation)
 
 		Keyword arguments:
@@ -163,9 +163,20 @@ class EntityList:
 
 		"""
 
+		if  self._realPage > self._pagination['total_pages']:
+			raise StopIteration
+
 		ret = self.toArray()
 
-		self.next()
+		if not self._pagination['current_page'] == self._pagination['total_pages']:
+			if 'page' in self._filters.keys():
+				self._filters['page'] += 1
+			else:
+				self._filters['page']  = 2
+
+			self._generateCollectionData()
+
+		self._realPage += 1
 
 		return ret
 
@@ -180,7 +191,7 @@ class EntityList:
 		"""
 
 		if self._pagination['current_page'] == self._pagination['total_pages']:
-			return
+			return False
 
 		self._filters['page'] = self._pagination['total_pages']
 		self._generateCollectionData()
@@ -200,7 +211,7 @@ class EntityList:
 
 		"""
 
-		# return self._collection
+		self.first()
 		return self
 
 	def total(self):
