@@ -8,7 +8,16 @@ class BugsHandler(EntityHandler):
 	def find(self, id_):
 		super().find(id_)
 
-		req = APIRequest(self._origin, '/v1/bugs/' + str(id_), 'GET')
+		req = APIRequest(
+			self._origin,
+			'/v1/bugs/' + str(id_),
+			'GET',
+			{
+				'params': {
+					'include': 'steps,platform,attachments,comments,tags'
+				}
+			}
+		)
 		return Bug(self._origin, req.exec_())
 
 	def delete(self, id_):
@@ -41,5 +50,9 @@ class BugsHandler(EntityHandler):
 		}
 
 		if self.enforce(fields, supports):
+			initFields = {'include': 'steps,platform'}
+			initFields.update(fields)
+			fields = initFields
+
 			req = APIRequest(self._origin, '/v1/bugs/' + str(id_), 'PUT', {'params': fields})
 			return Bug(self._origin, req.exec_())

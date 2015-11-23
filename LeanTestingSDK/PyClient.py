@@ -1,7 +1,10 @@
 import sys
 import os
 
-sys.path.insert(0, os.path.dirname(os.path.realpath(__file__))) # adds current SDK path to sys.path for imports
+# adds current SDK path to sys.path for imports
+sys.path.insert(0, os.path.dirname(os.path.realpath(__file__)))
+
+from Exception.SDKInvalidArgException import SDKInvalidArgException
 
 from Handler.Auth.OAuth2Handler				import OAuth2Handler
 from Handler.User.UserHandler				import UserHandler
@@ -21,12 +24,14 @@ class PyClient:
 
 	_accessToken  = None
 
-	auth		  = None
-	user		  = None
-	projects	  = None
-	bugs		  = None
-	attachments	  = None
-	platform	  = None
+	auth		= None
+	user		= None
+	projects	= None
+	bugs		= None
+	attachments	= None
+	platform	= None
+
+	debugReturn = None
 
 	def __init__(self):
 		"""

@@ -44,6 +44,10 @@ class ProjectBugsHandler(EntityHandler):
 			supports['project_version_id'] = False
 
 		if self.enforce(fields, supports):
+			initFields = {'include': 'steps,platform'}
+			initFields.update(fields)
+			fields = initFields
+
 			req = APIRequest(
 				self._origin,
 				'/v1/projects/' + str(self._projectID) + '/bugs',
@@ -58,6 +62,10 @@ class ProjectBugsHandler(EntityHandler):
 			filters = {}
 
 		super().all(filters)
+
+		initFilters = {'include': 'steps,platform,attachments,comments,tags'}
+		initFilters.update(filters)
+		filters = initFilters
 
 		request = APIRequest(self._origin, '/v1/projects/' + str(self._projectID) + '/bugs', 'GET')
 		return EntityList(self._origin, request, Bug, filters)

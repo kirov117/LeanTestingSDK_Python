@@ -12,11 +12,15 @@ class PlatformBrowsersHandler(EntityHandler):
 
 		super().all(filters)
 
+		initFilters = {'include': 'versions'}
+		initFilters.update(filters)
+		filters = initFilters
+
 		request = APIRequest(self._origin, '/v1/platform/browsers', 'GET')
 		return EntityList(self._origin, request, PlatformBrowser, filters)
 
 	def find(self, id_):
 		super().find(id_)
 
-		req = APIRequest(self._origin, '/v1/platform/browsers/' + str(id_), 'GET')
+		req = APIRequest(self._origin, '/v1/platform/browsers/' + str(id_), 'GET', {'params': {'include': 'versions'}})
 		return PlatformBrowser(self._origin, req.exec_())

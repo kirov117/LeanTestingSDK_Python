@@ -38,11 +38,14 @@ setup(
 
 	keywords = 'development',
 
-	packages = find_packages(exclude = ['contrib', 'docs', 'tests']),
+	# packages = find_packages(exclude = ['tests']),
+	packages = find_packages(),
 
-	install_requires = [
-		'pycurl'
-	],
+	install_requires = ['pycurl'],
+
+	extras_require = {
+		'test': ['coverage', 'unittest2']
+	},
 
 	include_package_data = True
 )
