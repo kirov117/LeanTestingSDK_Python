@@ -93,6 +93,20 @@ class MockRequestsTest(unittest.TestCase):
 		data = self._client.user.getInformation()
 
 		self.assertEqual(resp, data)
+	def testGetUserOrganizations(self):
+		colName = 'organizations'
+		retClass = UserOrganization
+		resp = self._rcol(colName, ['_id', 'name', 'alias', 'url', 'logo'])
+		self._client.debugReturn = {'data': json.dumps(resp), 'status': 200}
+
+		col = self._client.user.organizations.all()
+
+		self.assertEqual(resp[colName], col.toArray())
+		self.assertIsInstance(col._collection[0], retClass)
+		self.assertEqual(resp['meta']['pagination']['total'], col.total())
+		self.assertEqual(resp['meta']['pagination']['total_pages'], col.totalPages())
+		self.assertEqual(resp['meta']['pagination']['count'], col.count())
+	# END USER
 
 
 

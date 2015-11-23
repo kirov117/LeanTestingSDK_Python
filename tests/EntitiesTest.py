@@ -53,40 +53,40 @@ class EntitiesTest(unittest.TestCase):
 
 	_entityColllection = [
 		[Bug, {
-            'comments'      : BugCommentsHandler,
-            'attachments'   : BugAttachmentsHandler
-        }],
-        [BugAttachment],
-        [BugComment],
-        [PlatformBrowser, {
-            'versions'      : PlatformBrowserVersionsHandler
-        }],
-        [PlatformBrowserVersion],
-        [PlatformDevice],
-        [PlatformOS, {
-            'versions'      : PlatformOSVersionsHandler
-        }],
-        [PlatformOSVersion],
-        [PlatformType, {
-            'devices'       : PlatformTypeDevicesHandler
-        }],
-        [Project, {
-            'sections'      : ProjectSectionsHandler,
-            'versions'      : ProjectVersionsHandler,
-            'users'         : ProjectUsersHandler,
+			'comments'      : BugCommentsHandler,
+			'attachments'   : BugAttachmentsHandler
+		}],
+		[BugAttachment],
+		[BugComment],
+		[PlatformBrowser, {
+			'versions'      : PlatformBrowserVersionsHandler
+		}],
+		[PlatformBrowserVersion],
+		[PlatformDevice],
+		[PlatformOS, {
+			'versions'      : PlatformOSVersionsHandler
+		}],
+		[PlatformOSVersion],
+		[PlatformType, {
+			'devices'       : PlatformTypeDevicesHandler
+		}],
+		[Project, {
+			'sections'      : ProjectSectionsHandler,
+			'versions'      : ProjectVersionsHandler,
+			'users'         : ProjectUsersHandler,
 
-            'bugTypeScheme'             : ProjectBugTypeSchemeHandler,
-            'bugStatusScheme'           : ProjectBugStatusSchemeHandler,
-            'bugSeverityScheme'         : ProjectBugSeveritySchemeHandler,
-            'bugReproducibilityScheme'  : ProjectBugReproducibilitySchemeHandler,
+			'bugTypeScheme'             : ProjectBugTypeSchemeHandler,
+			'bugStatusScheme'           : ProjectBugStatusSchemeHandler,
+			'bugSeverityScheme'         : ProjectBugSeveritySchemeHandler,
+			'bugReproducibilityScheme'  : ProjectBugReproducibilitySchemeHandler,
 
-            'bugs'          : ProjectBugsHandler
-        }],
-        [ProjectBugScheme],
-        [ProjectSection],
-        [ProjectUser],
-        [ProjectVersion],
-        [UserOrganization]
+			'bugs'          : ProjectBugsHandler
+		}],
+		[ProjectBugScheme],
+		[ProjectSection],
+		[ProjectUser],
+		[ProjectVersion],
+		[UserOrganization]
 	]
 
 
