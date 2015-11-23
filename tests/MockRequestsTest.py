@@ -4,7 +4,6 @@ import json
 import random
 
 import unittest2 as unittest
-from unittest.mock import MagicMock
 
 # adds current SDK path to sys.path for imports
 sys.path.insert(0, os.path.realpath(os.path.dirname(os.path.realpath(__file__)) + '/../LeanTestingSDK'))
