@@ -44,7 +44,7 @@ setup(
 	install_requires = ['pycurl'],
 
 	extras_require = {
-		'test': ['coverage', 'unittest2']
+		'test': ['unittest2']
 	},
 
 	include_package_data = True

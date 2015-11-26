@@ -1,5 +1,6 @@
 .old
 runtime.py
+venv
 
 *.pyc
 __pycache__

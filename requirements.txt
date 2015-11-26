@@ -1,0 +1,2 @@
+pycurl>=7.18
+unittest2>=1.1
